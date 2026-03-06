@@ -209,29 +209,54 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* 8. Our Journey (Fixed Timeline) */}
-      <section className="py-32 bg-zinc-950">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-5xl font-serif text-center mb-20">Our Journey</h2>
-          <div className="relative border-l border-gold-500/20 ml-4 md:ml-0 md:left-1/2">
-            {timeline.map((item, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className={`relative mb-16 md:w-1/2 ${i % 2 === 0 ? 'md:pr-16 md:text-right md:left-[-50%]' : 'md:pl-16 md:left-[50%]'}`}
-              >
-                <div className="absolute top-0 w-4 h-4 bg-luxury-gold rounded-full -left-[9px] md:left-auto md:right-[-9px]" 
-                  style={{ left: i % 2 === 0 ? 'auto' : '-9px', right: i % 2 === 0 ? '-9px' : 'auto' }}
-                />
-                <p className="text-3xl font-serif text-luxury-gold mb-2">{item.year}</p>
-                <p className="text-white/60 font-light leading-relaxed">{item.event}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+ {/* 8. Our Journey */}
+<section className="py-32 bg-zinc-950">
+  <div className="max-w-4xl mx-auto px-6">
+
+    <h2 className="text-5xl font-serif text-center mb-20">
+      Our Journey
+    </h2>
+
+    {/* Center Line */}
+    <div className="relative">
+
+      {/* Vertical Center Line */}
+      <div className="absolute left-1/2 -translate-x-1/2 h-full w-[1px] bg-gold-500/20" />
+
+      {timeline.map((item, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: i * 0.1 }}
+          className={`relative mb-16 w-1/2 ${
+            i % 2 === 0
+              ? "text-right pr-16 left-0"
+              : "text-left pl-16 ml-auto"
+          }`}
+        >
+
+          {/* Dot */}
+          <div
+            className={`absolute top-0 w-4 h-4 bg-luxury-gold rounded-full 
+            ${i % 2 === 0 ? "right-[-8px]" : "left-[-8px]"}`}
+          />
+
+          <p className="text-3xl font-serif text-luxury-gold mb-2">
+            {item.year}
+          </p>
+
+          <p className="text-white/60 font-light leading-relaxed">
+            {item.event}
+          </p>
+
+        </motion.div>
+      ))}
+
+    </div>
+  </div>
+</section>
     </div>
   );
 };
